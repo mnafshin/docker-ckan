@@ -2,7 +2,7 @@ FROM phusion/baseimage:0.9.19
 
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 
-ENV CKAN_VERSION release-v2.6.0
+ENV CKAN_VERSION release-v2.6.0-hobbit
 
 ENV HOME /root
 ENV CKAN_HOME /usr/lib/ckan/default
@@ -29,7 +29,7 @@ RUN virtualenv $CKAN_HOME
 RUN mkdir -p $CKAN_HOME $CKAN_CONFIG $CKAN_DATA
 RUN chown www-data:www-data $CKAN_DATA
 
-RUN git clone https://github.com/ckan/ckan $CKAN_HOME/src/ckan
+RUN git clone https://github.com/earthquakesan/hobbit-benchmark-ckan $CKAN_HOME/src/ckan
 WORKDIR $CKAN_HOME/src/ckan
 RUN git checkout $CKAN_VERSION
 
