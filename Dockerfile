@@ -2,7 +2,7 @@ FROM phusion/baseimage:0.9.19
 
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 
-ENV CKAN_VERSION release-v2.6.0
+ENV CKAN_VERSION release-v2.6-latest
 
 ENV HOME /root
 ENV CKAN_HOME /usr/lib/ckan/default
