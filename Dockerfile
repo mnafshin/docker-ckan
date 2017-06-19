@@ -55,6 +55,7 @@ RUN mkdir /var/cache/nginx
 RUN cp $CKAN_HOME/src/ckan/contrib/docker/main.cf /etc/postfix/main.cf
 
 # Configure runit
+COPY 50_configure $CKAN_HOME/src/ckan/contrib/docker/my_init.d/50_configure
 RUN cp -r $CKAN_HOME/src/ckan/contrib/docker/my_init.d/* /etc/my_init.d
 RUN cp -r $CKAN_HOME/src/ckan/contrib/docker/svc/* /etc/service
 CMD ["/sbin/my_init"]
