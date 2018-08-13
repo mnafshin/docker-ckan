@@ -1,6 +1,6 @@
 # See CKAN docs on installation from Docker Compose on usage
 FROM debian:jessie
-MAINTAINER Open Knowledge
+MAINTAINER earthquakesan@gmail.com
 
 # Install required system packages
 RUN apt-get -q -y update \
@@ -43,15 +43,18 @@ RUN mkdir -p $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH && \
     ln -s $CKAN_VENV/bin/paster /usr/local/bin/ckan-paster
 
 # Setup CKAN
-RUN git clone https://github.com/earthquakesan/hobbit-benchmark-ckan $CKAN_VENV/src/ckan
+RUN git clone https://github.com/ckan/ckan $CKAN_VENV/src/ckan && \
+    cd $CKAN_VENV/src/ckan && \
+    git checkout ckan-2.8.1
 RUN ckan-pip install -U pip && \
     ckan-pip install --upgrade --no-cache-dir -r $CKAN_VENV/src/ckan/requirement-setuptools.txt && \
     ckan-pip install --upgrade --no-cache-dir -r $CKAN_VENV/src/ckan/requirements.txt && \
     ckan-pip install -e $CKAN_VENV/src/ckan/ && \
     ln -s $CKAN_VENV/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini && \
-    cp -v $CKAN_VENV/src/ckan/contrib/docker/ckan-entrypoint.sh /ckan-entrypoint.sh && \
-    chmod +x /ckan-entrypoint.sh && \
     chown -R ckan:ckan $CKAN_HOME $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH
+
+ADD ckan-entrypoint.sh /ckan-entrypoint.sh
+RUN chmod +x /ckan-entrypoint.sh
 
 ENTRYPOINT ["/ckan-entrypoint.sh"]
 
