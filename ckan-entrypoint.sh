@@ -40,6 +40,16 @@ sed -i "/ckan.site_url/c ckan.site_url=$CKAN_SITE_URL" $CONFIG
 sed -i "/sqlalchemy.url/c sqlalchemy.url=$CKAN_SQLALCHEMY_URL" $CONFIG
 sed -i "/solr_url/c solr_url=$CKAN_SOLR_URL" $CONFIG
 sed -i "/ckan.redis.url/c ckan.redis.url=$CKAN_REDIS_URL" $CONFIG
+
+if [ ! -z "$CKAN_RECAPTCHA_PUBLICKEY" ]; then 
+  if [ ! -z "$CKAN_RECAPTCHA_PRIVATEKEY" ]; then 
+    sed -i "/ckan.recaptcha.publickey/c ckan.recaptcha.publickey=$CKAN_RECAPTCHA_PUBLICKEY" $CONFIG
+    sed -i "/ckan.recaptcha.privatekey/c ckan.recaptcha.privatekey=$CKAN_RECAPTCHA_PRIVATEKEY" $CONFIG
+  fi
+else 
+  echo "Recaptcha private/public keys are not set. Ignoring."
+fi
+
 #sed -i "/ckan.datapusher.url/c ckan.datapusher.url=$CKAN_DATAPUSHER_URL" $CONFIG
 #sed -i "/ckan.datastore.write_url/c ckan.datastore.write_url=$CKAN_DATASTORE_WRITE_URL" $CONFIG
 #sed -i "/ckan.datastore.read_url/c ckan.datastore.read_url=$CKAN_DATASTORE_READ_URL" $CONFIG

@@ -56,6 +56,9 @@ RUN ckan-pip install -U pip && \
 ADD ckan-entrypoint.sh /ckan-entrypoint.sh
 RUN chmod +x /ckan-entrypoint.sh
 
+ADD recaptcha.html $CKAN_VENV/src/ckan/ckan/templates/user/snippets/recaptcha.html
+ADD captcha.py $CKAN_VENV/src/ckan/ckan/lib/captcha.py
+
 ENTRYPOINT ["/ckan-entrypoint.sh"]
 
 USER ckan
