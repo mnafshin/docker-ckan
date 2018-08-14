@@ -50,10 +50,19 @@ else
   echo "Recaptcha private/public keys are not set. Ignoring."
 fi
 
+export ORIGINAL_CKAN_PLUGINS="stats text_view image_view recline_view"
+
+sed -i "/ckan.plugins/c ckan.plugins=$ORIGINAL_CKAN_PLUGINS $ADDITIONAL_CKAN_PLUGINS" $CONFIG
+
+# add harvest configuration
+sed -i "/\[app:main\]/a ckan.harvest.mq.type = redis" $CONFIG
+sed -i "/\[app:main\]/a ckan.harvest.mq.hostname = $REDIS_HOSTNAME" $CONFIG
+
 #sed -i "/ckan.datapusher.url/c ckan.datapusher.url=$CKAN_DATAPUSHER_URL" $CONFIG
 #sed -i "/ckan.datastore.write_url/c ckan.datastore.write_url=$CKAN_DATASTORE_WRITE_URL" $CONFIG
 #sed -i "/ckan.datastore.read_url/c ckan.datastore.read_url=$CKAN_DATASTORE_READ_URL" $CONFIG
 
 set_environment
 ckan-paster --plugin=ckan db init -c "${CKAN_CONFIG}/production.ini"
+ckan-paster --plugin=ckanext-harvest harvester initdb -c "${CKAN_CONFIG}/production.ini"
 exec "$@"
