@@ -75,6 +75,7 @@ ADD captcha.py $CKAN_VENV/src/ckan/ckan/lib/captcha.py
 
 ADD opal-logo-ckan.png $CKAN_VENV/src/ckan/ckan/public/base/images/ckan-logo.png
 ADD promoted.html $CKAN_VENV/src/ckan/ckan/templates/home/snippets/promoted.html
+ADD footer.html $CKAN_VENV/src/ckan/ckan/templates/footer.html
 
 ENTRYPOINT ["/ckan-entrypoint.sh"]
 
