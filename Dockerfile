@@ -32,6 +32,8 @@ ENV CKAN_STORAGE_PATH=/var/lib/ckan
 
 # Build-time variables specified by docker-compose.yml / .env
 ARG CKAN_SITE_URL
+ARG CKAN_SITE_TITLE
+ARG CKAN_SITE_DESCRIPTION
 
 # Create ckan user
 RUN useradd -r -u 900 -m -c "ckan account" -d $CKAN_HOME -s /bin/false ckan
@@ -70,6 +72,9 @@ RUN chmod +x /ckan-entrypoint.sh
 
 ADD recaptcha.html $CKAN_VENV/src/ckan/ckan/templates/user/snippets/recaptcha.html
 ADD captcha.py $CKAN_VENV/src/ckan/ckan/lib/captcha.py
+
+ADD opal-logo-ckan.png $CKAN_VENV/src/ckan/ckan/public/base/images/ckan-logo.png
+ADD promoted.html $CKAN_VENV/src/ckan/ckan/templates/home/snippets/promoted.html
 
 ENTRYPOINT ["/ckan-entrypoint.sh"]
 

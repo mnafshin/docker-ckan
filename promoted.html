@@ -1,0 +1,18 @@
+{% set intro = g.site_intro_text %}
+
+<div class="module-content box">
+  <header>
+    {% if intro %}
+      {{ h.render_markdown(intro) }}
+    {% else %}
+      <h1 class="page-heading">{{ _("Willkommen auf dem OPAL CKAN") }}</h1>
+      <p>
+        {% trans %}In diesem CKAN-Portal finden Sie aufbereitete Metadaten
+        offener Datens&auml;tze des <a href="http://www.projekt-opal.de">
+        OPAL-Forschungsprojekts</a>.
+        {% endtrans %}
+      </p>
+    {% endif %}
+  </header>
+
+</div>

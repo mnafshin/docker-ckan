@@ -11,6 +11,8 @@ abort () {
 
 set_environment () {
   #export CKAN_SITE_ID=${CKAN_SITE_ID}
+  export CKAN_SITE_TITLE=${CKAN_SITE_TITLE}
+  export CKAN_SITE_DESCRIPTION=${CKAN_SITE_DESCRIPTION}
   export CKAN_SITE_URL=${CKAN_SITE_URL}
   export CKAN_SQLALCHEMY_URL=${CKAN_SQLALCHEMY_URL}
   export CKAN_SOLR_URL=${CKAN_SOLR_URL}
@@ -36,6 +38,8 @@ if [ ! -e "$CONFIG" ]; then
   write_config
 fi
 
+sed -i "/ckan.site_title/c ckan.site_title=$CKAN_SITE_TITLE" $CONFIG
+sed -i "/ckan.site_description/c ckan.site_description=$CKAN_SITE_DESCRIPTION" $CONFIG
 sed -i "/ckan.site_url/c ckan.site_url=$CKAN_SITE_URL" $CONFIG
 sed -i "/sqlalchemy.url/c sqlalchemy.url=$CKAN_SQLALCHEMY_URL" $CONFIG
 sed -i "/solr_url/c solr_url=$CKAN_SOLR_URL" $CONFIG
