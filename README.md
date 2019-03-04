@@ -1,10 +1,9 @@
 # CKAN docker image
 
-This CKAN is modified to be used within the HOBBIT platform.
+This CKAN is modified to be used within the OPAL portal.
 
 # How to RUN
 
-[https://github.com/earthquakesan/docker-ckan-hobbit](See docker-compose file here.)
+[See docker-compose file here.](https://github.com/projekt-opal/opal-docker-compose)
 
 # TODOs
-- Mail server setup (internal)
